@@ -63,7 +63,10 @@ export default function ChatPage() {
         body: JSON.stringify({ chatId, message: userMessage }),
       });
 
-      if (!res.ok) throw new Error("请求失败");
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || `HTTP ${res.status}`);
+      }
 
       const newChatId = res.headers.get("X-Chat-Id");
       if (newChatId) setChatId(newChatId);
@@ -92,7 +95,8 @@ export default function ChatPage() {
           return updated;
         });
       }
-    } catch {
+    } catch (err) {
+      console.error("Chat error:", err);
       setMessages((prev) => [
         ...prev,
         {

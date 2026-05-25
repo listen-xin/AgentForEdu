@@ -2,54 +2,63 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function LoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [isRegister, setIsRegister] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
-    if (isRegister) {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+    try {
+      if (isRegister) {
+        const res = await fetch("/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, password }),
+        });
+        if (!res.ok) {
+          const data = await res.json();
+          setError(data.error || "注册失败");
+          setLoading(false);
+          return;
+        }
+      }
+
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
       });
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.error || "注册失败");
+
+      if (result?.error) {
+        setError("邮箱或密码错误");
+        setLoading(false);
         return;
       }
+
+      // Full page reload to ensure session state is picked up
+      window.location.href = "/chat";
+    } catch {
+      setError("操作失败，请稍后重试");
+      setLoading(false);
     }
-
-    const result = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-
-    if (result?.error) {
-      setError("邮箱或密码错误");
-      return;
-    }
-
-    router.push("/chat");
-    router.refresh();
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">AgentForEdu</h1>
+          <Link href="/" className="text-3xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
+            AgentForEdu
+          </Link>
           <p className="text-gray-600 mt-2">高等教育智能体平台</p>
         </div>
 
@@ -105,14 +114,18 @@ export default function LoginPage() {
             </div>
 
             {error && (
-              <p className="text-red-500 text-sm text-center">{error}</p>
+              <p className="text-red-500 text-sm text-center bg-red-50 py-2 rounded-lg">{error}</p>
             )}
 
             <button
               type="submit"
-              className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
+              disabled={loading}
+              className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
             >
-              {isRegister ? "注册" : "登录"}
+              {loading && (
+                <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              )}
+              {loading ? "处理中..." : isRegister ? "注册" : "登录"}
             </button>
           </form>
 

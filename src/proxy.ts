@@ -1,16 +1,17 @@
 import { auth } from "@/lib/auth";
 
 export default auth((req) => {
-  if (!req.auth && req.nextUrl.pathname.startsWith("/chat")) {
-    const newUrl = new URL("/login", req.nextUrl.origin);
-    return Response.redirect(newUrl);
-  }
-  if (!req.auth && req.nextUrl.pathname.startsWith("/history")) {
-    const newUrl = new URL("/login", req.nextUrl.origin);
-    return Response.redirect(newUrl);
+  const { pathname } = req.nextUrl;
+  if (
+    !req.auth &&
+    (pathname.startsWith("/chat") || pathname.startsWith("/history"))
+  ) {
+    const loginUrl = new URL("/login", req.nextUrl.origin);
+    loginUrl.searchParams.set("callbackUrl", pathname);
+    return Response.redirect(loginUrl);
   }
 });
 
 export const config = {
-  matcher: ["/chat/:path*", "/history/:path*"],
+  matcher: ["/chat", "/chat/:path*", "/history", "/history/:path*"],
 };
