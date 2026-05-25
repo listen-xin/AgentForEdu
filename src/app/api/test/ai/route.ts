@@ -20,7 +20,7 @@ export async function GET() {
     let text = "";
     for await (const part of result.fullStream) {
       if (part.type === "text-delta") {
-        text += part.textDelta;
+        text += part.text;
       }
     }
 

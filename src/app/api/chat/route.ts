@@ -58,8 +58,8 @@ export async function POST(req: NextRequest) {
       try {
         for await (const part of result.fullStream) {
           if (part.type === "text-delta") {
-            fullText += part.textDelta;
-            controller.enqueue(encoder.encode(part.textDelta));
+            fullText += part.text;
+            controller.enqueue(encoder.encode(part.text));
           }
         }
         streamEnded = true;
