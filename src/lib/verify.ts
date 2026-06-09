@@ -31,7 +31,11 @@ export async function sendEmailCode(email: string, type: "register" | "reset"): 
   const smtpHost = process.env.SMTP_HOST;
   if (smtpHost) {
     try {
-      const nodemailer = await import("nodemailer");
+      const nodemailer = await import("nodemailer").catch(() => null);
+      if (!nodemailer) {
+        console.error("[EMAIL] nodemailer module failed to load");
+        return { success: false, error: "邮件服务暂不可用" };
+      }
       const transporter = nodemailer.default.createTransport({
         host: smtpHost,
         port: parseInt(process.env.SMTP_PORT || "587"),
