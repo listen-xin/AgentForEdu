@@ -412,7 +412,7 @@ function markdownToDocxChildren(
           new D.Paragraph({
             spacing: { before: 20, after: 20 },
             bullet: { level: 0 },
-            children: [createFormattedTextRun(item)],
+            children: [createFormattedTextRun(item, D)],
           })
         );
       }
@@ -423,7 +423,7 @@ function markdownToDocxChildren(
     children.push(
       new D.Paragraph({
         spacing: { before: 60, after: 60 },
-        children: [createFormattedTextRun(line)],
+        children: [createFormattedTextRun(line, D)],
       })
     );
     i++;
@@ -432,9 +432,9 @@ function markdownToDocxChildren(
   return children;
 }
 
-function createFormattedTextRun(text: string): TextRun {
+function createFormattedTextRun(text: string, D: any): any {
   // Handle inline formatting: **bold**, *italic*, `code`
-  const parts: TextRun[] = [];
+  const parts: any[] = [];
   let remaining = text;
   const regex = /(\*\*\*(.+?)\*\*\*)|(\*\*(.+?)\*\*)|(\*(.+?)\*)|(`([^`]+)`)/g;
   let lastIdx = 0;
