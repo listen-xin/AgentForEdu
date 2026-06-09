@@ -1,18 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import {
-  Document,
-  Packer,
-  Paragraph,
-  TextRun,
-  HeadingLevel,
-  Table,
-  TableRow,
-  TableCell,
-  WidthType,
-  AlignmentType,
-  BorderStyle,
-} from "docx";
+
+// Types from docx — only import types, not runtime code
+import type { Paragraph, Table } from "docx";
 
 export async function POST(req: NextRequest) {
   const session = await auth();
@@ -32,7 +22,7 @@ export async function POST(req: NextRequest) {
     case "md":
       return exportMarkdown(content, safeFilename);
     case "docx":
-      return exportDocx(content, safeFilename);
+      return await exportDocx(content, safeFilename);
     case "pdf":
       return exportPdfHtml(content, safeFilename);
     default:
@@ -57,23 +47,23 @@ function exportMarkdown(content: string, filename: string) {
   });
 }
 
-/** Convert markdown to .docx using docx package */
-function exportDocx(content: string, filename: string) {
-  const children = markdownToDocxChildren(content);
+/** Convert markdown to .docx using docx package (dynamic import) */
+async function exportDocx(content: string, filename: string) {
+  const D = await import("docx").catch(() => null);
+  if (!D) {
+    return NextResponse.json({ error: "Word 导出暂不可用" }, { status: 500 });
+  }
 
-  const doc = new Document({
-    sections: [
-      {
-        properties: {},
-        children,
-      },
-    ],
+  const children = markdownToDocxChildren(content, D);
+
+  const doc = new D.Document({
+    sections: [{ properties: {}, children }],
   });
 
   return new NextResponse(
     new ReadableStream({
       async start(controller) {
-        const buffer = await Packer.toBuffer(doc);
+        const buffer = await D.Packer.toBuffer(doc);
         controller.enqueue(new Uint8Array(buffer));
         controller.close();
       },
@@ -214,9 +204,10 @@ function markdownToHtml(md: string): string {
 // ─── Markdown → DOCX children ───
 
 function markdownToDocxChildren(
-  md: string
-): (Paragraph | Table)[] {
-  const children: (Paragraph | Table)[] = [];
+  md: string,
+  D: any
+): any[] {
+  const children: any[] = [];
   const lines = md.split("\n");
   let i = 0;
 
@@ -240,11 +231,11 @@ function markdownToDocxChildren(
       }
       i++; // skip closing ```
       children.push(
-        new Paragraph({
+        new D.Paragraph({
           spacing: { before: 120, after: 120 },
           shading: { type: "solid", color: "F5F5F5" },
           children: [
-            new TextRun({
+            new D.TextRun({
               text: codeLines.join("\n"),
               font: "Consolas",
               size: 18,
@@ -276,19 +267,19 @@ function markdownToDocxChildren(
           .map((c) => c.trim())
       );
 
-      const table = new Table({
-        width: { size: 100, type: WidthType.PERCENTAGE },
+      const table = new D.Table({
+        width: { size: 100, type: D.WidthType.PERCENTAGE },
         rows: [
-          new TableRow({
+          new D.TableRow({
             tableHeader: true,
             children: headers.map(
               (h) =>
-                new TableCell({
+                new D.TableCell({
                   shading: { type: "solid", color: "F0F0F0" },
                   children: [
-                    new Paragraph({
-                      alignment: AlignmentType.CENTER,
-                      children: [new TextRun({ text: h, bold: true, size: 20 })],
+                    new D.Paragraph({
+                      alignment: D.AlignmentType.CENTER,
+                      children: [new D.TextRun({ text: h, bold: true, size: 20 })],
                     }),
                   ],
                 })
@@ -296,13 +287,13 @@ function markdownToDocxChildren(
           }),
           ...rows.map(
             (row) =>
-              new TableRow({
+              new D.TableRow({
                 children: row.map(
                   (cell) =>
-                    new TableCell({
+                    new D.TableCell({
                       children: [
-                        new Paragraph({
-                          children: [new TextRun({ text: cell, size: 20 })],
+                        new D.Paragraph({
+                          children: [new D.TextRun({ text: cell, size: 20 })],
                         }),
                       ],
                     })
@@ -318,10 +309,10 @@ function markdownToDocxChildren(
     // Heading
     if (line.startsWith("# ")) {
       children.push(
-        new Paragraph({
-          heading: HeadingLevel.HEADING_1,
+        new D.Paragraph({
+          heading: D.HeadingLevel.HEADING_1,
           spacing: { before: 240, after: 120 },
-          children: [new TextRun({ text: line.slice(2).trim(), bold: true, size: 32 })],
+          children: [new D.TextRun({ text: line.slice(2).trim(), bold: true, size: 32 })],
         })
       );
       i++;
@@ -329,10 +320,10 @@ function markdownToDocxChildren(
     }
     if (line.startsWith("## ")) {
       children.push(
-        new Paragraph({
-          heading: HeadingLevel.HEADING_2,
+        new D.Paragraph({
+          heading: D.HeadingLevel.HEADING_2,
           spacing: { before: 200, after: 100 },
-          children: [new TextRun({ text: line.slice(3).trim(), bold: true, size: 28 })],
+          children: [new D.TextRun({ text: line.slice(3).trim(), bold: true, size: 28 })],
         })
       );
       i++;
@@ -340,10 +331,10 @@ function markdownToDocxChildren(
     }
     if (line.startsWith("### ")) {
       children.push(
-        new Paragraph({
-          heading: HeadingLevel.HEADING_3,
+        new D.Paragraph({
+          heading: D.HeadingLevel.HEADING_3,
           spacing: { before: 160, after: 80 },
-          children: [new TextRun({ text: line.slice(4).trim(), bold: true, size: 24 })],
+          children: [new D.TextRun({ text: line.slice(4).trim(), bold: true, size: 24 })],
         })
       );
       i++;
@@ -351,10 +342,10 @@ function markdownToDocxChildren(
     }
     if (line.startsWith("#### ")) {
       children.push(
-        new Paragraph({
-          heading: HeadingLevel.HEADING_4,
+        new D.Paragraph({
+          heading: D.HeadingLevel.HEADING_4,
           spacing: { before: 120, after: 60 },
-          children: [new TextRun({ text: line.slice(5).trim(), bold: true, size: 22 })],
+          children: [new D.TextRun({ text: line.slice(5).trim(), bold: true, size: 22 })],
         })
       );
       i++;
@@ -364,9 +355,9 @@ function markdownToDocxChildren(
     // Horizontal rule
     if (line.trim() === "---") {
       children.push(
-        new Paragraph({
+        new D.Paragraph({
           spacing: { before: 120, after: 120 },
-          border: { bottom: { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" } },
+          border: { bottom: { style: D.BorderStyle.SINGLE, size: 1, color: "CCCCCC" } },
           children: [],
         })
       );
@@ -377,12 +368,12 @@ function markdownToDocxChildren(
     // Blockquote
     if (line.startsWith("> ")) {
       children.push(
-        new Paragraph({
+        new D.Paragraph({
           spacing: { before: 40, after: 40 },
           indent: { left: 480 },
-          border: { left: { style: BorderStyle.SINGLE, size: 6, color: "CCCCCC" } },
+          border: { left: { style: D.BorderStyle.SINGLE, size: 6, color: "CCCCCC" } },
           children: [
-            new TextRun({
+            new D.TextRun({
               text: line.slice(2).trim(),
               italics: true,
               color: "666666",
@@ -418,7 +409,7 @@ function markdownToDocxChildren(
       }
       for (const item of listItems) {
         children.push(
-          new Paragraph({
+          new D.Paragraph({
             spacing: { before: 20, after: 20 },
             bullet: { level: 0 },
             children: [createFormattedTextRun(item)],
@@ -430,7 +421,7 @@ function markdownToDocxChildren(
 
     // Regular paragraph
     children.push(
-      new Paragraph({
+      new D.Paragraph({
         spacing: { before: 60, after: 60 },
         children: [createFormattedTextRun(line)],
       })
@@ -451,27 +442,27 @@ function createFormattedTextRun(text: string): TextRun {
 
   while ((match = regex.exec(text)) !== null) {
     if (match.index > lastIdx) {
-      parts.push(new TextRun({ text: text.slice(lastIdx, match.index), size: 20 }));
+      parts.push(new D.TextRun({ text: text.slice(lastIdx, match.index), size: 20 }));
     }
     if (match[1]) {
-      parts.push(new TextRun({ text: match[2], bold: true, italics: true, size: 20 }));
+      parts.push(new D.TextRun({ text: match[2], bold: true, italics: true, size: 20 }));
     } else if (match[3]) {
-      parts.push(new TextRun({ text: match[4], bold: true, size: 20 }));
+      parts.push(new D.TextRun({ text: match[4], bold: true, size: 20 }));
     } else if (match[5]) {
-      parts.push(new TextRun({ text: match[6], italics: true, size: 20 }));
+      parts.push(new D.TextRun({ text: match[6], italics: true, size: 20 }));
     } else if (match[7]) {
-      parts.push(new TextRun({ text: match[8], font: "Consolas", size: 18 }));
+      parts.push(new D.TextRun({ text: match[8], font: "Consolas", size: 18 }));
     }
     lastIdx = regex.lastIndex;
   }
 
   if (lastIdx < text.length) {
-    parts.push(new TextRun({ text: text.slice(lastIdx), size: 20 }));
+    parts.push(new D.TextRun({ text: text.slice(lastIdx), size: 20 }));
   }
 
   if (parts.length === 1) return parts[0];
   // Return first part and merge... actually, let me just use a simple approach
-  return new TextRun({ text, size: 20 });
+  return new D.TextRun({ text, size: 20 });
 }
 
 function escapeHtml(text: string): string {
