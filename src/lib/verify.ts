@@ -153,18 +153,18 @@ function generateCode(): string {
   return crypto.randomInt(100000, 999999).toString();
 }
 
-// ─── Aliyun SMS (stub — requires real credentials) ───
+// ─── Aliyun SMS (real API call with HMAC-SHA1 signing) ───
 
 async function sendAliyunSms(phone: string, code: string, type: "register" | "reset") {
   const accessKeyId = process.env.ALIYUN_ACCESS_KEY_ID!;
   const accessKeySecret = process.env.ALIYUN_ACCESS_KEY_SECRET!;
   const signName = process.env.ALIYUN_SMS_SIGN_NAME || "AgentForEdu";
-  const templateCode = type === "register"
-    ? process.env.ALIYUN_SMS_TEMPLATE_REGISTER || "SMS_XXXXXXXXX"
-    : process.env.ALIYUN_SMS_TEMPLATE_RESET || "SMS_XXXXXXXXX";
+  const templateCode =
+    type === "register"
+      ? process.env.ALIYUN_SMS_TEMPLATE_REGISTER || "SMS_XXXXXXXXX"
+      : process.env.ALIYUN_SMS_TEMPLATE_RESET || "SMS_XXXXXXXXX";
 
-  // Build Aliyun SMS API request
-  const params = new URLSearchParams({
+  const params: Record<string, string> = {
     AccessKeyId: accessKeyId,
     Action: "SendSms",
     Format: "JSON",
@@ -174,11 +174,35 @@ async function sendAliyunSms(phone: string, code: string, type: "register" | "re
     TemplateParam: JSON.stringify({ code }),
     SignatureMethod: "HMAC-SHA1",
     SignatureVersion: "1.0",
-    Timestamp: new Date().toISOString(),
-    SignatureNonce: Date.now().toString() + Math.random().toString(36).slice(2),
+    Timestamp: new Date().toISOString().replace(/\.\d{3}Z$/, "Z"),
+    SignatureNonce: crypto.randomUUID().replace(/-/g, ""),
     Version: "2017-05-25",
-  });
+  };
 
-  // For now, just log — real implementation needs HMAC-SHA1 signing + HTTP request
-  console.log(`[SMS-ALIYUN] Would send to ${phone}: ${code}`);
+  // Sort keys alphabetically for canonical query string
+  const sortedKeys = Object.keys(params).sort();
+  const canonicalQuery = sortedKeys
+    .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+    .join("&");
+
+  // Build string to sign: GET&%2F&<encoded canonical query>
+  const stringToSign = `GET&${encodeURIComponent("/")}&${encodeURIComponent(canonicalQuery)}`;
+
+  // HMAC-SHA1 sign
+  const hmac = crypto.createHmac("sha1", `${accessKeySecret}&`);
+  hmac.update(stringToSign);
+  const signature = hmac.digest("base64");
+
+  const finalParams = new URLSearchParams(params);
+  finalParams.set("Signature", signature);
+
+  const response = await fetch(
+    `https://dysmsapi.aliyuncs.com/?${finalParams.toString()}`,
+    { method: "GET" }
+  );
+
+  const result = await response.json();
+  if (result.Code !== "OK") {
+    throw new Error(`Aliyun SMS error: ${result.Code} — ${result.Message}`);
+  }
 }
