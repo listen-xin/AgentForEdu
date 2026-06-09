@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "target": "course-designer",
+    "skill_mode": "tool",
+    "total_agents": 4,
+    "completed_agents": ["R1", "R3", "R4"],
+    "agents_lost": ["R2"],
+    "timestamp": "2026-05-26"
+  },
+  "dilemma_case_gate": {
+    "threshold_tool": 2,
+    "total_cases": 8,
+    "per_report": {"R1": 2, "R3": 3, "R4": 3},
+    "status": "pass"
+  },
+  "key_findings_summary": [
+    "Verb-level misalignment between ILOs and assessments is the most common invisible failure — 'understand' masks multiple cognitive levels",
+    "Constructive Alignment breaks at three interfaces: ILO→TLA, ILO→AT, TLA→AT, with ILO→AT mismatch being most damaging due to backwash effect",
+    "Active learning improves outcomes 1.5x but lecture remains essential for L1-L2 content; the key is blended ratio shifting from lecture-heavy to active-heavy across learner progression",
+    "Group discussions fail for three predictable reasons: no accountability, vague prompts, no structured output — all fixable with design patterns",
+    "Flipped classroom compliance is the main bottleneck; requires all three: low volume, scaffolded guide, graded consequence",
+    "UDL's three principles (Engagement, Representation, Action & Expression) are implementable at zero cost via multi-modal switching, choice boards, and Bloom-level questioning",
+    "Differentiation's core pattern: standardize outcomes (what), differentiate pathways (how). 'Core + Choice' framework with weekly convergence checkpoints",
+    "Teacher time budget is the hardest constraint for feedback; the solution is designing feedback systems (rubrics + peer review + rotation) not performing feedback labor",
+    "Diagnostic pre-assessment with 3-tier grouping is the most scalable differentiation entry point"
+  ],
+  "cross_report_contradictions": [],
+  "complementary_patterns": [
+    "R1's Three-Gate Alignment Audit + R3's Activity Selection Matrix form a natural sequence: align objectives first, then choose activities by objective level",
+    "R4's 'core + choice' framework reinforces R3's breadth-vs-depth decision rule — both recommend compressing breadth for depth when constrained",
+    "R3's compliance-first rule for flipped classrooms and R4's 'check-feedback-revise cycle' both depend on low-stakes formative assessment mechanisms",
+    "All three reports converge on: assessment drives student behavior more than stated objectives (backwash effect), making assessment design the highest-leverage intervention point"
+  ],
+  "coverage_gaps": [
+    "R2 (cognitive load & sequencing) was lost — coverage on threshold concepts, content chunking, and spiral sequencing is missing",
+    "No report specifically addresses digital/online course design modalities vs in-person",
+    "No report addresses course evaluation methods (beyond student feedback loops)"
+  ]
+}

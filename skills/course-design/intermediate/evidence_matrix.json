@@ -1,0 +1,40 @@
+{
+  "evidence_sources": {
+    "R1": [
+      "Anderson & Krathwohl (2001). A Taxonomy for Learning, Teaching, and Assessing",
+      "Biggs & Tang (2011). Teaching for Quality Learning at University",
+      "Biggs (1996). Enhancing Teaching through Constructive Alignment",
+      "Quality Matters (2020). Specific Review Standards (6th ed.)",
+      "Branch (2009). Instructional Design: The ADDIE Approach",
+      "Hosier (2022). When Assessments Misalign with Learning Objectives",
+      "Wang et al. (2013). Exploration of Biggs' constructive alignment"
+    ],
+    "R3": [
+      "Freeman et al. (2014). Active learning increases student performance. PNAS",
+      "Deslauriers et al. (2019). Measuring actual learning versus feeling of learning. PNAS",
+      "Krathwohl (2002). A revision of Bloom's taxonomy",
+      "Merrill (2002). First principles of instruction",
+      "Stains et al. (2018). Anatomy of STEM teaching. Science",
+      "Novak (2011). Just-in-time teaching",
+      "Hattie (2012). Visible Learning for Teachers"
+    ],
+    "R4": [
+      "CAST (2018). Universal Design for Learning Guidelines v2.2",
+      "Tomlinson (2014). The Differentiated Classroom. ASCD",
+      "Tomlinson & Moon (2013). Assessment and Student Success",
+      "Hattie (2012). Visible Learning for Teachers",
+      "Black & Wiliam (1998). Assessment and Classroom Learning",
+      "Wiliam (2011). Embedded Formative Assessment",
+      "Angelo & Cross (1993). Classroom Assessment Techniques",
+      "Darling-Hammond et al. (2020). Science of learning and development",
+      "Gibbs & Simpson (2005). Conditions Under Which Assessment Supports Learning",
+      "Nicol & Macfarlane-Dick (2006). Formative assessment and self-regulated learning"
+    ]
+  },
+  "evidence_density": {
+    "total_unique_sources": 24,
+    "high_density_sources": ["Biggs & Tang", "Hattie", "Krathwohl/Bloom", "Tomlinson", "CAST", "Freeman et al."],
+    "modality_coverage": ["academic_literature"],
+    "status": "adequate_for_standard"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "score": 8,
+  "max": 10,
+  "breakdown": {
+    "steps": 2,
+    "boundary": 2,
+    "trigger_desc": 2,
+    "length": 1,
+    "anti_patterns": 1
+  },
+  "persona_extras": {
+    "note": "Tool mode - persona extras not applicable"
+  },
+  "grade": "standard",
+  "notes": {
+    "line_count": 103,
+    "sections_present": ["Activation Rules", "Agentic Protocol", "Core Operation Models", "Output Style", "Output Modes", "Boundary Rules", "References"],
+    "anti_pattern_check": "clean - all 9 anti-patterns checked, 0 hits",
+    "mechanical_validation": "skipped - Python not available in environment"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "lesson-planning",
+  "version": "0.1.0",
+  "skill_mode": "tool",
+  "domain": "education_instructional_design",
+  "depth": "deep",
+  "quality": "standard",
+  "source_evidence": [
+    "web_chinese_edu_2025",
+    "web_intl_frameworks_2025",
+    "web_common_mistakes_2025"
+  ],
+  "frameworks_integrated": [
+    "Understanding by Design (Wiggins & McTighe)",
+    "BOPPPS (ISW Canada)",
+    "4A's Framework",
+    "Gagne's Nine Events",
+    "Universal Design for Learning (CAST)",
+    "Constructive Alignment (Biggs/SOLO)",
+    "学历案 (崔允漷/卢明)",
+    "新课标核心素养 (中国教育部2022版)"
+  ],
+  "research_agents": 6,
+  "exemplar_status": "degraded",
+  "compiled": "2026-05-26"
+}

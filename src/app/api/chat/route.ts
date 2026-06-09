@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { createStream } from "@/lib/ai";
 import { detectSkill } from "@/lib/skills";
+import { searchWeb, shouldSearch } from "@/lib/search";
 
 export async function POST(req: NextRequest) {
   const session = await auth();
@@ -13,6 +14,29 @@ export async function POST(req: NextRequest) {
   const { chatId, message } = await req.json();
   if (!message) {
     return NextResponse.json({ error: "Message required" }, { status: 400 });
+  }
+
+  // Perform web search if the query could benefit from current info
+  const searchQuery = shouldSearch(message);
+  let searchContext = "";
+  if (searchQuery) {
+    try {
+      const searchResult = await searchWeb(searchQuery);
+      if (searchResult.answer || searchResult.results.length > 0) {
+        searchContext = "【网络搜索结果】\n";
+        if (searchResult.answer) {
+          searchContext += `摘要：${searchResult.answer}\n\n`;
+        }
+        if (searchResult.results.length > 0) {
+          searchContext += "相关链接：\n";
+          searchResult.results.forEach((r) => {
+            searchContext += `- ${r.snippet}\n`;
+          });
+        }
+      }
+    } catch {
+      // Search failure is non-blocking
+    }
   }
 
   // Find or create chat
@@ -45,8 +69,8 @@ export async function POST(req: NextRequest) {
   }));
   history.push({ role: "user", content: message });
 
-  // Create stream
-  const result = createStream(message, history);
+  // Create stream with search context
+  const result = createStream(message, history, searchContext);
 
   // Stream text to client while capturing full response for DB
   const encoder = new TextEncoder();

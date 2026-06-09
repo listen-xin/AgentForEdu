@@ -1,0 +1,28 @@
+{
+  "gate": "Gate 1: Research Merge",
+  "status": "pass",
+  "agents_completed": 6,
+  "agents_lost": [],
+  "agent_summary": {
+    "R1": {"status": "pass", "dimension": "教学目标设计", "dilemma_cases": 2, "supported_ops": 6, "rejected_ops": 5},
+    "R2": {"status": "pass", "dimension": "学情分析与差异化设计", "dilemma_cases": 2, "supported_ops": 6, "rejected_ops": 5},
+    "R3": {"status": "pass", "dimension": "教学过程与活动序列设计", "dilemma_cases": 2, "supported_ops": 7, "rejected_ops": 4},
+    "R4": {"status": "pass", "dimension": "重难点突破策略", "dilemma_cases": 2, "supported_ops": 7, "rejected_ops": 5},
+    "R5": {"status": "pass", "dimension": "评价设计与教-学-评一致性", "dilemma_cases": 2, "supported_ops": 6, "rejected_ops": 4},
+    "R6": {"status": "pass", "dimension": "单元整体设计与课后反思闭环", "dilemma_cases": 2, "supported_ops": 8, "rejected_ops": 6}
+  },
+  "dilemma_case_gate": {
+    "total_cases": 12,
+    "threshold": 2,
+    "status": "pass"
+  },
+  "cross_report_contradictions": [],
+  "key_integration_insights": [
+    "All 6 dimensions converge on '教-学-评一致性' as the cross-cutting meta-principle",
+    "UbD/Backward Design appears as the unifying framework across R1 (objectives), R5 (assessment), and R6 (unit design)",
+    "Scaffolding (fading/transfer) is the common mechanism across R2 (differentiation), R3 (activity sequencing), and R4 (breakthrough strategies)",
+    "The Chinese 学历案 framework bridges R3 (activity flow), R5 (embedded assessment), and R6 (unit-level coherence)",
+    "All reports independently identify 'listing without strategy' as the cardinal sin of novice lesson planning",
+    "Post-teaching reflection (R6) should connect to pre-teaching diagnosis (R2) forming a continuous improvement loop"
+  ]
+}

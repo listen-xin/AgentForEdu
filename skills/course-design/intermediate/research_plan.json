@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "target": "course-designer",
+    "target_type": "method",
+    "skill_mode": "tool",
+    "depth": "deep",
+    "agent_count": 4,
+    "created_at": "2026-05-26",
+    "source_modalities_used": [],
+    "evidence_depth_assessment": "sparse — no specific external sources provided, domain knowledge based",
+    "depth_correction_applied": "deep → ceiling+1, cap at 8",
+    "final_agent_count": 4,
+    "domain_packs_consulted": [],
+    "lens_dimensions_used": true
+  },
+  "agents": [
+    {
+      "id": "R1",
+      "dimension": "学习目标与评估对齐 (Learning Objectives & Assessment Alignment)",
+      "search_direction": "课程设计中「教学目标→教学活动→评价方式」三者不对齐是系统性问题。搜索 Bloom 分类法操作化的最佳实践和 Constructive Alignment 在实际课程中的失败案例——当评估任务与教学目标不匹配时，学生行为如何扭曲？教师在哪些典型场景下会跳过对齐检查？有哪些可操作的检查清单能防止这种脱节？",
+      "key_questions": [
+        "Bloom 分类法在具体学科中如何操作化为可观测行为动词？",
+        "Constructive Alignment 落地时最常见的 3 个失败模式是什么？",
+        "如何让 skill 内置一个可执行的对齐性检查步骤？"
+      ]
+    },
+    {
+      "id": "R2",
+      "dimension": "认知负荷与序列设计 (Cognitive Load & Sequencing)",
+      "search_direction": "课程内容排序是「先概念后案例」还是「先案例后概念」？搜索认知负荷理论在课程设计中的具体应用——何时该用分块(chunking)、何时该用支架(scaffolding)。阈值概念(threshold concept)的识别方法。典型困境：内容太多 vs 时间不够，新手教师如何决定砍什么、留什么？",
+      "key_questions": [
+        "认知负荷理论在课程时长不同（1课时 vs 学期）时如何调整？",
+        "阈值概念的识别方法有哪些可操作的启发式？",
+        "序列设计中「简化但不失真」的通用原则是什么？"
+      ]
+    },
+    {
+      "id": "R3",
+      "dimension": "学习活动与交互形式选择 (Activity Design & Interaction Modalities)",
+      "search_direction": "小组讨论、案例分析、模拟、讲座、翻转课堂——这些形式的选择依据是什么？搜索基于目标类型(认知/技能/态度)、学习者成熟度和资源约束的交互形式选择矩阵。典型困境：小组讨论总是流于形式、讲座被认为效率最高但对高阶目标无效——设计者如何在效率与效果之间做取舍？",
+      "key_questions": [
+        "不同交互形式对不同类型学习目标的有效性证据有哪些？",
+        "如何设计一个选择矩阵让设计者根据约束条件匹配合适形式？",
+        "在线 vs 线下的形式选择逻辑有什么本质不同？"
+      ]
+    },
+    {
+      "id": "R4",
+      "dimension": "差异化评估与反馈循环 (Differentiation & Feedback Loops)",
+      "search_direction": "同一个课程方案面对能力差异大的学习者群体时如何调整？搜索 UDL (Universal Design for Learning) 的可操作框架和差异化教学的三轴模型（内容/过程/产品）。困境：标准化评估 vs 个性化学习的矛盾——怎么设计评估体系既能保证统一标准又能容纳差异化路径？课后反馈循环如何设计才能让课程持续迭代？",
+      "key_questions": [
+        "UDL 在具体课程设计中的检查清单有哪些？",
+        "差异化调整的三轴模型如何嵌入标准课程方案？",
+        "最短可行的课后反馈闭环是什么样的？"
+      ]
+    }
+  ],
+  "merge_notes": {
+    "intent": "course-designer 是方法类 tool skill，4 个 agent 覆盖从目标设计→内容组织→活动设计→评估反馈的完整课程设计闭环",
+    "coverage_check": "R1 目标+评估, R2 内容+序列, R3 活动+交互, R4 差异化+反馈 — 四者形成完整闭环",
+    "lens_crosswalk": {
+      "认知负荷与序列设计": "R2",
+      "目标分级与可观测证据": "R1",
+      "教为中心→学为中心": "R3 (隐性贯穿)",
+      "前备知识与概念图谱": "R2 (阈值概念)",
+      "评估与目标对齐审计": "R1",
+      "多模态交互形式选择": "R3",
+      "差异化与UDL": "R4",
+      "反脆弱反馈循环": "R4"
+    }
+  }
+}

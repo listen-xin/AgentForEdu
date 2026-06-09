@@ -1,0 +1,18 @@
+{
+  "name": "course-designer",
+  "version": "0.1.0",
+  "skill_mode": "tool",
+  "domain": "education",
+  "description": "系统化课程设计方法论 — 从目标对齐到反馈设计，教-学-评一致的课程方案输出",
+  "depth": "deep",
+  "quality": "validated",
+  "source_agents": ["R1", "R2", "R3", "R4"],
+  "agents_lost": [],
+  "exemplars_used": ["lesson-planning"],
+  "evidence_sources": 35,
+  "dilemma_cases": 11,
+  "operation_models": 13,
+  "created_at": "2026-05-26",
+  "updated_at": "2026-05-26",
+  "notes": "R2 补全完成：5 个认知负荷与序列设计模型加入（H9-H13）。证据来源从 24 增至 35（含 Sweller, Kalyuga, Meyer & Land, Bruner, Alfieri 等）。"
+}

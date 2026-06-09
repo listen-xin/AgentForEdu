@@ -1,0 +1,15 @@
+{
+  "target": "course-designer",
+  "target_slug": "course-designer",
+  "goal": "蒸馏课程设计方法论 skill，系统化输出课程方案",
+  "sources": [],
+  "source_description": "无具体外部源——基于课程设计领域的方法论蒸馏",
+  "depth_level": "deep",
+  "skill_mode": "tool",
+  "primary_domain": "education",
+  "secondary_domains": [],
+  "evidence_depth": "sparse",
+  "source_modalities_used": [],
+  "agent_count_estimate": 4,
+  "created_at": "2026-05-26"
+}

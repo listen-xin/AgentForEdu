@@ -1,0 +1,121 @@
+{
+  "operations": [
+    {
+      "id": "OP-01",
+      "name": "Three-Gate Alignment Audit",
+      "source": "R1",
+      "description": "For each ILO-Assessment-Activity triplet, verify alignment at three gates: ILO↔AT, AT↔TLA, and criteria↔ILO. Return traffic-light status per gate with remediation suggestions.",
+      "priority": "critical",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-02",
+      "name": "Verb Unpacking & Refinement",
+      "source": "R1",
+      "description": "When an ILO uses non-observable verbs (understand, know, learn), prompt user for observable evidence then suggest Bloom's-aligned verb + knowledge dimension pair.",
+      "priority": "critical",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-03",
+      "name": "Activity Selection Matrix",
+      "source": "R3",
+      "description": "Map objective type (Bloom's L1-L6 / affective / skill) to recommended activity formats with time estimates, scaled by learner prior knowledge and class size.",
+      "priority": "critical",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-04",
+      "name": "Breadth-vs-Depth Decision Rule",
+      "source": "R3",
+      "description": "When time is constrained: lecture for L1-L2, active methods for L3-L5. Compress case quantity, choose bridging cases, offload L1-L2 to pre-class.",
+      "priority": "high",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-05",
+      "name": "Objective Decomposition (Core + Choice)",
+      "source": "R4",
+      "description": "Decompose course objectives into core set (all must master) and extension set (some may). Align differentiation boundaries to this split.",
+      "priority": "critical",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-06",
+      "name": "Diagnostic Pre-Assessment & 3-Tier Grouping",
+      "source": "R4",
+      "description": "Use short pre-assessment to sort learners into 3 tiers (emerging/developing/proficient) as differentiation input.",
+      "priority": "high",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-07",
+      "name": "Pathway Differentiation with Convergence Checkpoints",
+      "source": "R4",
+      "description": "Design tiered learning paths (scaffolded/semi-structured/compacted) with regular convergence checkpoints for core objective verification.",
+      "priority": "high",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-08",
+      "name": "Three-Layer Feedback System",
+      "source": "R4",
+      "description": "Rubric-based calibration (coverage) + peer assessment (scaling) + rotating teacher deep feedback (depth). Design the feedback system, not the labor.",
+      "priority": "high",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-09",
+      "name": "Feedback Closure Cycle",
+      "source": "R4",
+      "description": "Reserve in-class time for students to read feedback and immediately revise. Ensures feedback reception → understanding → action chain.",
+      "priority": "medium",
+      "evidence_strength": "high"
+    },
+    {
+      "id": "OP-10",
+      "name": "Activity Failure Mode Checker",
+      "source": "R3",
+      "description": "Before selecting an activity, run automated checklist of 3-5 common failure conditions specific to that activity type.",
+      "priority": "medium",
+      "evidence_strength": "medium"
+    },
+    {
+      "id": "OP-11",
+      "name": "Constraint Input Collector",
+      "source": "R1",
+      "description": "Before alignment audit, collect fixed constraints: exam policy, class size, TA support, accreditation. Prevents infeasible recommendations.",
+      "priority": "high",
+      "evidence_strength": "medium"
+    },
+    {
+      "id": "OP-12",
+      "name": "Multi-Modal Switching (Low-Resource UDL)",
+      "source": "R4",
+      "description": "Cover same concept via listen-see-do three-channel switch. Zero-cost UDL Representation implementation.",
+      "priority": "medium",
+      "evidence_strength": "medium"
+    },
+    {
+      "id": "OP-13",
+      "name": "Choice Board",
+      "source": "R4",
+      "description": "Single A4 sheet listing 4 practice/expression modes; students complete N of N. Low-cost differentiation with student agency.",
+      "priority": "low",
+      "evidence_strength": "medium"
+    },
+    {
+      "id": "OP-14",
+      "name": "Flipped Classroom Readiness Diagnostic",
+      "source": "R3",
+      "description": "Given learner and context data, recommend pre-class compliance strategy and diagnose non-compliance type (motivation/skill/time).",
+      "priority": "low",
+      "evidence_strength": "medium"
+    }
+  ],
+  "total_candidates": 14,
+  "critical_priority": 4,
+  "high_priority": 5,
+  "medium_priority": 4,
+  "low_priority": 2
+}

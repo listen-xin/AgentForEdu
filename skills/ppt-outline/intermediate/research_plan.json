@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "target": "ppt-architect",
+    "target_type": "method",
+    "skill_mode": "tool",
+    "depth": "deep",
+    "agent_count": 6,
+    "created_at": "2026-05-26",
+    "source_modalities_used": [],
+    "evidence_depth_assessment": "sparse — no specific external sources, domain knowledge based",
+    "depth_correction_applied": "deep → sparse baseline (2-3) + deep ceiling+1 + lens维度丰富 → 6 agents",
+    "final_agent_count": 6,
+    "domain_packs_consulted": ["media-content-production"],
+    "lens_dimensions_used": true
+  },
+  "agents": [
+    {
+      "id": "R1",
+      "dimension": "叙事骨架设计与场景适配 (Narrative Structures & Scenario Adaptation)",
+      "search_direction": "PPT 叙事结构的选择矩阵：SCQA（情境-冲突-问题-答案）适合商业提案、金字塔原理（结论先行）适合汇报、英雄之旅适合 keynote——这些结构何时用哪个？不同受众场景（C-suite/学术答辩/产品路演/内部周报）各自对页数、节奏、叙事颗粒度有什么不同预期？搜索知名演讲者和咨询公司（McKinsey, TED, Apple Keynote）的 deck 结构模式的差异。困境：用户通常把所有内容堆进一个模板，不知道叙事结构决定了内容的取舍框架。",
+      "key_questions": [
+        "SCQA vs 金字塔原理 vs 英雄之旅各自适合什么场景？它们的页数/节奏特征是什么？",
+        "C-suite、学术答辩、产品路演、内部周报各自对 deck 的隐性预期是什么？",
+        "如何让 skill 在开始时自动推荐叙事结构并给出理由？"
+      ]
+    },
+    {
+      "id": "R2",
+      "dimension": "幻灯片分解算法与信息密度控制 (Slide Decomposition & Information Density)",
+      "search_direction": "一段原始内容如何拆成 N 页幻灯片？搜索 presentation design 中关于 'one idea per slide' 的操作化方法——如何从段落中提取主题句→识别支撑论据→确定每页视觉载体→检测信息密度。认知负荷理论在 PPT 中的应用：工作记忆限制（每页最多几个信息单元？）。困境：用户倾向于把 Word 文档分行贴进 PPT，每页 200+ 字，信息密度过高导致观众认知过载。好的分解算法应该产出简洁但不过度简化的幻灯片。",
+      "key_questions": [
+        "一个可执行的 PPT 内容分解协议是什么样的（段落→标题→支撑→视觉载体）？",
+        "每页幻灯片的信息单元上限是多少（文字/图表/图片各多少）？",
+        "如何设计一个可机械执行的信息密度检查规则？"
+      ]
+    },
+    {
+      "id": "R3",
+      "dimension": "视觉层级与排版决策框架 (Visual Hierarchy & Layout Framework)",
+      "search_direction": "让非设计师做出可接受的视觉决策：标题/副标题/正文的三级字号比例、色彩功能分配（强调色 vs 辅助色 vs 背景色）、留白最小比例、文字对齐的单一原则（左对齐是默认最优）。这些不是审美问题而是认知问题——视觉层级降低了观众的搜索成本。搜索 presentation design 中关于 typography, color, whitespace 的实用规则。困境：大多数人没有设计背景但必须做设计决策，过于自由导致灾难，过于模板化导致死板。Skill 需要在「给你选择」和「替你选择」之间找到平衡。",
+      "key_questions": [
+        "非设计师可用的视觉层级决策规则有哪些（字号比例/色彩功能/留白比例）？",
+        "如何在不要求设计背景的情况下给出可行的排版建议？",
+        "通用的色彩功能分配方案（非品牌特定）是什么？"
+      ]
+    },
+    {
+      "id": "R4",
+      "dimension": "数据可视化在演示中的应用 (Data Visualization for Presentations)",
+      "search_direction": "PPT 里的数据不是「放个表」或「插个柱状图」就完了。搜索数据可视化最佳实践（Tufte, Few）在 PPT 场景中的适配：如何根据数据要传达的信息类型（比较/趋势/构成/分布/关系）推荐图表类型？信息图表的关键原则有哪些？困境：excel 默认图表样式在投影仪上不可读——字号太小、颜色太弱。PPT 数据图需要「为投影而设计」的特殊约束。同时每张数据页的标题应该是一句完整的结论句（『Q3 营收增长 15%，主要驱动是北美市场』），不是『营收数据分析』。",
+      "key_questions": [
+        "Tufte/Few 的数据可视化原则如何适配到投影场景？",
+        "如何根据数据信息类型自动推荐图表（比较→柱状，趋势→折线，构成→饼图/堆叠，分布→直方图，关系→散点）？",
+        "为投影而设计的数据图有哪些特殊约束（字号/对比度/简化程度）？"
+      ]
+    },
+    {
+      "id": "R5",
+      "dimension": "演讲节奏与时间预算 (Presentation Rhythm & Time Budgeting)",
+      "search_direction": "幻灯片数量 × 每页平均时间 ≠ 总时长——关键页（hook/转折/结论）应该占据更多时间。搜索 TED 风格的演讲节奏设计、Nancy Duarte 的演讲结构理论、以及 Guy Kawasaki 的 10/20/30 规则。困境：排练超时后应该先砍哪页？大多数人的做法是砍掉最后几页，但正确的做法是识别核心论点依赖于哪些页来决定保留什么。Skill 需要输出每页的建议时长区间并做总时长校验。",
+      "key_questions": [
+        "TED/Duarte/Kawasaki 各自对演讲节奏的设计原则是什么？",
+        "如何标注每页的建议时长区间并做总时长校验？",
+        "排练超时时的内容修剪优先级算法是什么？"
+      ]
+    },
+    {
+      "id": "R6",
+      "dimension": "反模式识别与质量校验 (Anti-Pattern Detection & Quality Assurance)",
+      "search_direction": "PPT 领域有大量可机械检测的坏习惯：整页 bullet point（死亡标志）、动画过度使用（演讲杀手）、字号<18pt（投影不可读）、对比度不足、整段粘贴、缺少 call-to-action 页。这些不需要审美判断，是纯规则检查。搜索 presentation design 中关于 common mistakes 和 quality checklist 的系统化总结。困境：知道这些规则的人很多，但在交付前系统化检查的人很少——Skill 可以在输出后自动跑反模式扫描。",
+      "key_questions": [
+        "PPT 领域可机械检测的反模式清单有哪些（≥15 条）？",
+        "哪些反模式是致命级（会导致观众完全无法理解）、哪些是警示级？",
+        "call-to-action 页在什么场景下是必须的？如何自动检测缺失？"
+      ]
+    }
+  ],
+  "merge_notes": {
+    "intent": "ppt-architect 是方法类 tool skill，6 个 agent 覆盖从内容输入→叙事设计→内容分解→视觉决策→数据可视化→演讲节奏→质量校验的完整闭环",
+    "coverage_check": "R1 叙事+场景, R2 分解+密度, R3 视觉+排版, R4 数据可视化, R5 节奏+时间, R6 反模式+质检 — 形成端到端覆盖",
+    "lens_crosswalk": {
+      "叙事骨架设计": "R1",
+      "单页信息密度与认知负荷": "R2",
+      "幻灯片分解算法": "R2",
+      "视觉层级与排版约束": "R3",
+      "受众适配与场景感知": "R1",
+      "演讲节奏与时间预算": "R5",
+      "数据可视化决策": "R4",
+      "反模式识别": "R6"
+    }
+  }
+}

@@ -14,28 +14,33 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Credentials({
       name: "credentials",
       credentials: {
-        email: { label: "邮箱", type: "email" },
+        account: { label: "邮箱或手机号", type: "text" },
         password: { label: "密码", type: "password" },
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) return null;
+        const account = credentials?.account as string;
+        const password = credentials?.password as string;
+        if (!account || !password) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email as string },
+        // Try email first, then phone
+        let user = await prisma.user.findUnique({
+          where: { email: account },
         });
+
+        if (!user) {
+          user = await prisma.user.findUnique({
+            where: { phone: account },
+          });
+        }
 
         if (!user || !user.password) return null;
 
-        const isValid = await bcrypt.compare(
-          credentials.password as string,
-          user.password
-        );
-
+        const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) return null;
 
         return {
           id: user.id,
-          email: user.email,
+          email: user.email || "",
           name: user.name,
           image: user.image,
         };

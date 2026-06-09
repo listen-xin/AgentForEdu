@@ -1,0 +1,21 @@
+{
+  "target": "教案制作方法 (Lesson Planning Methodology)",
+  "goal": "从零蒸馏一个能自动生成完整、高质量教案的 tool skill，覆盖从教学目标设定到教学反思的全流程教学设计方法论",
+  "sources": [],
+  "depth_level": "deep",
+  "modality_analysis": {
+    "modalities_present": [],
+    "assessment": "无预设源文件，需通过 Research Swarm 在线搜集教学设计和教案制作领域知识",
+    "primary_domain": "education",
+    "secondary_domains": ["office-white-collar", "media-content-production"],
+    "domain_packs_available": {
+      "education": false,
+      "office-white-collar": true,
+      "media-content-production": true
+    },
+    "evidence_depth": "sparse",
+    "agent_count_after_correction": 6
+  },
+  "skill_mode": "tool",
+  "description": "教案制作助手 — 根据学科、年级、课型和教学目标，自动生成结构完整、符合课程标准、包含差异化设计的教案。本体为方法型 skill，非人物 persona。"
+}

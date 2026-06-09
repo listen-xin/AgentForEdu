@@ -1,0 +1,19 @@
+{
+  "score": 9,
+  "max": 10,
+  "breakdown": {
+    "steps": 2,
+    "boundary": 2,
+    "trigger_desc": 2,
+    "length": 1,
+    "anti_patterns": 1
+  },
+  "persona_extras": {
+    "forbidden_phrases": null,
+    "signature_line": null,
+    "note": "tool mode — persona extras not applicable"
+  },
+  "grade": "standard",
+  "updated_at": "2026-05-26",
+  "notes": "R2 补全后更新：13 个 Operation Models（H1-H13），SKILL.md 约 203 行，8 个 Output Modes。References 表格从 6 行增至 7 行（R2 加入）。"
+}

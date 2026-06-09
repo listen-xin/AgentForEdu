@@ -1,0 +1,15 @@
+{
+  "target": "ppt-architect",
+  "target_slug": "ppt-architect",
+  "goal": "蒸馏 PPT 演示文稿设计方法论 skill，系统化输出高质量演示方案",
+  "sources": [],
+  "source_description": "无具体外部源——基于演示设计、信息传达、演讲方法论领域知识蒸馏",
+  "depth_level": "deep",
+  "skill_mode": "tool",
+  "primary_domain": "media-content-production",
+  "secondary_domains": [],
+  "evidence_depth": "sparse",
+  "source_modalities_used": [],
+  "agent_count_estimate": 6,
+  "created_at": "2026-05-26"
+}

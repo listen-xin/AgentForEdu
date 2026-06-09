@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "target": "ppt-architect",
+    "skill_mode": "tool",
+    "total_agents": 6,
+    "completed_agents": ["R1", "R2", "R3", "R4", "R5", "R6"],
+    "agents_lost": [],
+    "timestamp": "2026-05-26"
+  },
+  "dilemma_case_gate": {
+    "threshold_tool": 2,
+    "total_cases": 16,
+    "per_report": {"R1": 3, "R2": 3, "R3": 3, "R4": 2, "R5": 3, "R6": 2},
+    "status": "pass"
+  },
+  "key_findings_summary": [
+    "SCQA与金字塔原理是互补关系不是互斥——高管汇报用结论先行+金字塔，提案用SCQA制造张力",
+    "幻灯片分解的核心操作是提取断言标题+识别支撑论据+确定视觉载体，而非按段落切分",
+    "非设计师可用的视觉层级规则：3级字号比例、60-30-10色彩功能、65%内容面积上限",
+    "数据可视化在投影场景下的特殊约束：字号≥24pt、结论式标题、去除非数据墨水",
+    "演讲节奏设计原则：Duarte Sparkline 交替振荡、Kawasaki 10/20/30、每~10分钟变换格式",
+    "可机械检测的反模式清单有20+条，分为致命级和警示级，应在交付前自动扫描"
+  ],
+  "cross_report_contradictions": [],
+  "coverage_gaps": []
+}

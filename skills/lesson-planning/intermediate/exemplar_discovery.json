@@ -1,0 +1,6 @@
+{
+  "status": "degraded",
+  "reason": "GitHub raw.githubusercontent.com unreachable. find-skills API not locally available.",
+  "fallback": "Using skill-grammar.md elite patterns (chain-of-steps + diagnostic + verification + 200-350 lines) + local LEAP/Lens/SkillAlchemy skills as structural references.",
+  "exemplars_used": ["skill-grammar.md elite template", "LEAP SKILL.md (tool mode)", "SkillAlchemy SKILL.md (orchestrator mode)"]
+}

@@ -1,0 +1,65 @@
+{
+  "plan_version": "1.0",
+  "target": "教案制作方法 (Lesson Planning Methodology)",
+  "depth": "deep",
+  "skip_exemplar": false,
+  "skip_validation": false,
+  "agent_count": 6,
+  "agents": [
+    {
+      "id": "R1",
+      "dimension": "教学目标与课程标准对齐",
+      "search_direction": "一线教师在将 Bloom 认知目标分类学与学科课程标准（如新课标）对齐时遇到什么典型困境？例如：知识点的认知层次如何判定？当课标要求'理解'而实际教学需要'应用'时怎么处理？搜集 3-5 个具体教学场景中的目标设定矛盾案例。",
+      "source_modalities": ["longform_text", "secondary_criticism"],
+      "output_report": "references/R01-objectives-alignment.md",
+      "weight": 1
+    },
+    {
+      "id": "R2",
+      "dimension": "学情分析与差异化策略",
+      "search_direction": "教师在备课阶段如何进行有效的学情分析？不同类型的学生（学困生、学优生、特殊需要学生）在同一节课中的差异化需求如何平衡？搜集真实教学案例中差异化设计失败的 Dilemma（如：顾了进度顾不上后进生，顾了后进生优等生吃不饱）。",
+      "source_modalities": ["longform_text", "secondary_criticism", "social_media"],
+      "output_report": "references/R02-differentiated-instruction.md",
+      "weight": 1
+    },
+    {
+      "id": "R3",
+      "dimension": "课堂活动设计与时间节奏",
+      "search_direction": "新手教师 vs 专家教师在课堂活动时序安排上的核心差异是什么？探究课堂教学中'时间不够用'这一普遍困境：目标太多 vs 时间有限的取舍原则；活动转换（transition）的损耗如何控制；不同课型（新授课/复习课/实验课/讲评课）的节奏模板差异。",
+      "source_modalities": ["longform_text", "secondary_criticism", "video_subtitle"],
+      "output_report": "references/R03-pacing-and-transitions.md",
+      "weight": 1
+    },
+    {
+      "id": "R4",
+      "dimension": "形成性评估与教学评一致性",
+      "search_direction": "'教—学—评'一致性在教案中如何落实？教师在教案中设计评估任务时面临什么典型困境：如何在不打断教学节奏的前提下诊断学生理解？评估任务如何既服务教学又服务考试？探究课堂提问、嵌入式小测、表现性任务等评估手段在真实课堂中的实施难点。",
+      "source_modalities": ["longform_text", "secondary_criticism"],
+      "output_report": "references/R04-assessment-alignment.md",
+      "weight": 1
+    },
+    {
+      "id": "R5",
+      "dimension": "教案格式规范与表达粒度",
+      "search_direction": "不同目的（日常上课/检查/公开课/比赛）的教案在详略程度、格式规范、表达方式上有什么本质区别？教师写教案时最常见的'形式主义陷阱'是什么？搜集不同阶段教师（实习/新手/骨干/专家）对教案格式的真实看法和取舍策略。",
+      "source_modalities": ["longform_text", "secondary_criticism", "social_media"],
+      "output_report": "references/R05-format-and-granularity.md",
+      "weight": 1
+    },
+    {
+      "id": "R6",
+      "dimension": "跨学科与跨学段教学设计差异",
+      "search_direction": "不同学科（语文/数学/英语/理科/文科）的教案设计在逻辑结构、活动类型、评估方式上的核心差异是什么？小学 vs 初中 vs 高中的课堂设计原则如何随认知发展阶段变化？搜集典型案例说明跨学科差异给教案设计带来的挑战和应对策略。",
+      "source_modalities": ["longform_text", "secondary_criticism"],
+      "output_report": "references/R06-cross-subject-differences.md",
+      "weight": 1
+    }
+  ],
+  "merge_intent": "All 6 dimensions are necessary for a comprehensive lesson-planning skill. R1-R5 cover the core vertical dimensions of lesson design; R6 provides horizontal coverage across subject and grade level variations. Evidence depth is sparse (no pre-supplied sources), so agents will rely on web research.",
+  "self_check": {
+    "depth_match": true,
+    "modality_coverage": false,
+    "dimension_coverage": true,
+    "merge_intent_documented": true
+  }
+}

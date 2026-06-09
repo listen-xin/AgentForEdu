@@ -1,0 +1,29 @@
+{
+  "source_modality_analysis": {
+    "web_chinese_edu_2025": {
+      "modality": "longform_text",
+      "reveals": "Chinese education policy alignment (新课标, 核心素养), 学历案 design patterns, 大单元教学 methodology, 教-学-评一体化 framework"
+    },
+    "web_intl_frameworks_2025": {
+      "modality": "longform_text",
+      "reveals": "Backward Design (UbD) process, UDL principles, BOPPPS/4A's activity structures, cognitive science principles for chunking and retrieval, formative assessment patterns"
+    },
+    "web_common_mistakes_2025": {
+      "modality": "secondary_criticism",
+      "reveals": "Failure modes: vague objectives, missing learner analysis, key points without strategies, no reflection loop, time misallocation, treating lesson plan as script"
+    }
+  },
+  "domain_inference": {
+    "primary": "education_instructional_design",
+    "secondary": ["office-white-collar"],
+    "note": "No dedicated education domain pack exists. Dimensions derived from Lens analysis + web evidence. office-white-collar contributes document_structure and review_workflow patterns."
+  },
+  "evidence_depth": {
+    "assessment": "moderate",
+    "rationale": "3 web search syntheses with substantial content, but all are aggregated/curated guides rather than primary research or practitioner interviews. No books, videos, or first-person accounts.",
+    "base_agent_range": "3-5",
+    "deep_correction": "ceiling +1 → 6 agents"
+  },
+  "skill_mode": "tool",
+  "skill_mode_rationale": "Target is a method/process for creating lesson plans, not a person/persona. Output is a reusable workflow that others can follow."
+}

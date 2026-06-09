@@ -1,0 +1,17 @@
+{
+  "name": "ppt-architect",
+  "version": "0.1.0",
+  "skill_mode": "tool",
+  "domain": "media-content-production",
+  "description": "演示文稿设计方法论 — 从叙事骨架到反模式校验的全流程 PPT 方案输出",
+  "depth": "deep",
+  "quality": "validated",
+  "source_agents": ["R1", "R2", "R3", "R4", "R5", "R6"],
+  "agents_lost": [],
+  "exemplars_used": ["lesson-planning", "course-designer"],
+  "evidence_sources": 50,
+  "dilemma_cases": 16,
+  "operation_models": 12,
+  "anti_patterns": 20,
+  "created_at": "2026-05-26"
+}
