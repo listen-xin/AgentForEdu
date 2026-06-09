@@ -2,6 +2,15 @@ import { prisma } from "./db";
 import crypto from "crypto";
 
 /**
+ * Whether real verification codes are enabled.
+ * Requires SMTP (email) or Aliyun (SMS) to be configured.
+ * When disabled, any 6-digit code is accepted (dev/test mode).
+ */
+export function isVerificationEnabled(): boolean {
+  return !!(process.env.SMTP_HOST || process.env.ALIYUN_ACCESS_KEY_ID);
+}
+
+/**
  * Send a verification code to an email address via SMTP.
  * In development mode, the code is logged to console.
  */

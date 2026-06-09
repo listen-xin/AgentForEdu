@@ -23,6 +23,7 @@ export default function LoginPage() {
   // State
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [devCode, setDevCode] = useState<string | null>(null); // shown when verification is disabled
 
   // Detect if account looks like phone or email
   const isPhone = /^1[3-9]\d{9}$/.test(account);
@@ -53,6 +54,12 @@ export default function LoginPage() {
         setError(data.error || "发送失败");
         setSendingCode(false);
         return;
+      }
+
+      // In dev mode, the code is returned in the response
+      if (data.devCode) {
+        setDevCode(data.devCode);
+        setCode(data.devCode); // auto-fill
       }
 
       setCodeSent(true);
@@ -146,6 +153,7 @@ export default function LoginPage() {
     setCode("");
     setCodeSent(false);
     setCountdown(0);
+    setDevCode(null);
   }
 
   return (
@@ -242,12 +250,17 @@ export default function LoginPage() {
                     {sendingCode ? "发送中..." : countdown > 0 ? `${countdown}s` : codeSent ? "重发" : "获取验证码"}
                   </button>
                 </div>
-                {isEmail && (
-                  <p className="text-[11px] text-gray-350 mt-1 ml-1">
-                    验证码将发送至邮箱（开发模式下请在浏览器控制台或终端查看）
+                {devCode && (
+                  <p className="text-[11px] text-emerald-600 mt-1 ml-1 font-medium">
+                    ✅ 开发模式 — 验证码已自动填入：{devCode}
                   </p>
                 )}
-                {isPhone && (
+                {!devCode && isEmail && (
+                  <p className="text-[11px] text-gray-350 mt-1 ml-1">
+                    验证码将发送至邮箱（开发模式下请在终端查看）
+                  </p>
+                )}
+                {!devCode && isPhone && (
                   <p className="text-[11px] text-gray-350 mt-1 ml-1">
                     验证码将通过短信发送（开发模式下请在终端查看）
                   </p>
