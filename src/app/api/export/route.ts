@@ -412,7 +412,7 @@ function markdownToDocxChildren(
           new D.Paragraph({
             spacing: { before: 20, after: 20 },
             bullet: { level: 0 },
-            children: [createFormattedTextRun(item, D)],
+            children: createFormattedTextRun(item, D),
           })
         );
       }
@@ -423,7 +423,7 @@ function markdownToDocxChildren(
     children.push(
       new D.Paragraph({
         spacing: { before: 60, after: 60 },
-        children: [createFormattedTextRun(line, D)],
+        children: createFormattedTextRun(line, D),
       })
     );
     i++;
@@ -432,10 +432,8 @@ function markdownToDocxChildren(
   return children;
 }
 
-function createFormattedTextRun(text: string, D: any): any {
-  // Handle inline formatting: **bold**, *italic*, `code`
+function createFormattedTextRun(text: string, D: any): any[] {
   const parts: any[] = [];
-  let remaining = text;
   const regex = /(\*\*\*(.+?)\*\*\*)|(\*\*(.+?)\*\*)|(\*(.+?)\*)|(`([^`]+)`)/g;
   let lastIdx = 0;
   let match: RegExpExecArray | null;
@@ -460,9 +458,7 @@ function createFormattedTextRun(text: string, D: any): any {
     parts.push(new D.TextRun({ text: text.slice(lastIdx), size: 20 }));
   }
 
-  if (parts.length === 1) return parts[0];
-  // Return first part and merge... actually, let me just use a simple approach
-  return new D.TextRun({ text, size: 20 });
+  return parts.length > 0 ? parts : [new D.TextRun({ text, size: 20 })];
 }
 
 function escapeHtml(text: string): string {

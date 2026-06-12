@@ -63,7 +63,7 @@ export async function POST(req: NextRequest) {
   });
 
   // Build history
-  const history = chat.messages.map((m) => ({
+  const history = chat.messages.map((m: { role: string; content: string }) => ({
     role: m.role as "user" | "assistant",
     content: m.content,
   }));
